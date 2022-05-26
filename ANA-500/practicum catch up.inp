@@ -1,0 +1,42 @@
+summary Age
+summary BodyweightKg
+summary Best3SquatKg
+summary Best3BenchKg
+summary Best3DeadliftKg
+
+series sex_stat = Sex=="M"
+summary sex_stat
+freq sex_stat
+
+freq Age --plot=display
+freq BodyweightKg --plot=display
+freq Best3SquatKg --plot=display
+freq Best3BenchKg --plot=display
+freq Best3DeadliftKg --plot=display
+
+ols TotalKg const BodyweightKg
+scalar ub = $coeff(BodyweightKg) + (critical(t, $df, .025) * $stderr(BodyweightKg))
+scalar lb = $coeff(BodyweightKg) - (critical(t, $df, .025) * $stderr(BodyweightKg))
+
+ols TotalKg const BodyweightKg Age sex_stat
+
+#Test the hypothesis that the variables “TotalKg” and “BodyweightKg” are related
+#Ho: totalkg and bodyweightkg are independent
+#Ha: totalkg and bodyweightkg are not independent
+corr TotalKg BodyweightKg
+#P-value = 0.0000 < 0.05
+#We reject the null hypothesis; the variables are statistically related
+
+#Test the hypothesis that the variables "TotalKg" and "Age" are related
+#Ho: totalkg and age are independent
+#Ha: totalkg and age are not independent
+corr TotalKg Age
+#P-value = 0.0000 < 0.05
+#We reject the null hypothesis; the variables are statistically related
+
+#Test the hypothesis that the variables "TotalKg" and "sex_stat" are related
+#Ho: totalkg and sex_stat are independent
+#Ha: totalkg and sex_stat are not independent
+corr TotalKg sex_stat
+#P-value = 0.0000 < 0.05
+#We reject the null hypothesis; the variables are statistically significant

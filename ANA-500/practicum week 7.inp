@@ -1,0 +1,33 @@
+#QUADRATIC
+series bwkgsq = BodyweightKg^2
+O1 <- ols TotalKg const BodyweightKg bwkgsq
+gnuplot TotalKg BodyweightKg --fit=quadratic --output=display
+
+#CUBIC
+series bwkgcu = BodyweightKg^3
+O2 <- ols TotalKg const BodyweightKg bwkgsq bwkgcu
+gnuplot TotalKg BodyweightKg --fit=cubic --output=display
+
+#INVERSE
+series invbwkg = 1/BodyweightKg
+O3 <- ols TotalKg const invbwkg
+gnuplot TotalKg BodyweightKg --fit=inverse --output=display
+
+#LINEAR-LOG
+series lntotalkg = ln(TotalKg)
+O4 <- ols lntotalkg const BodyweightKg
+gnuplot TotalKg BodyweightKg --fit=semilog --output=display
+
+#INTERACTION
+series intbwsex = BodyweightKg*sex_stat
+O5 <- ols TotalKg const BodyweightKg sex_stat intbwsex
+gnuplot TotalKg BodyweightKg --fit=none --output=display
+
+#estimates y = 302.045 + 3.161x
+#estimates y = 220.35 + 1.598x
+
+
+O6 <- ols TotalKg const BodyweightKg sex_stat intbwsex Age
+
+ols TotalKg const BodyweightKg sex_stat
+

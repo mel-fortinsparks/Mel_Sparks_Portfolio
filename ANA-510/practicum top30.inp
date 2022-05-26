@@ -1,0 +1,69 @@
+series mscommute_day = 52/mpg
+series mscommute_week = (mscommute_day*5)+(40/mpg)
+series mscommute_month = mscommute_week*4
+series mscommute_year = mscommute_week*52
+
+series mscost_day = mscommute_day*2.477
+series mscost_week = mscommute_week*2.477
+series mscost_month = mscommute_month*2.477
+series mscost_year = mscommute_year*2.477
+
+gnuplot mscost_year model --fit=none --output=display
+
+series sscommute_day = 128/mpg
+series sscommute_week = (sscommute_day*5)+(40/mpg)
+series sscommute_month = sscommute_week*4
+series sscommute_year = sscommute_week*52
+
+series sscost_day = sscommute_day*2.477
+series sscost_week = sscommute_week*2.477
+series sscost_month = sscommute_month*2.477
+series sscost_year = sscommute_year*2.477
+
+series msco2em = ((((52*5)+(20*2))*52)/15000)*co2em
+series ssco2em = ((((128*5)+(20*2))*52)/15000)*co2em
+
+series msaggregateY1 = price + mscost_year
+series ssaggregateY1 = price + sscost_year
+series msaggregateY2 = price + (mscost_year*2)
+series ssaggregateY2 = price + (sscost_year*2)
+series msaggregateY3 = price + (mscost_year*3)
+series ssaggregateY3 = price + (sscost_year*3)
+series msaggregateY4 = price + (mscost_year*4)
+series ssaggregateY4 = price + (sscost_year*4)
+series msaggregateY5 = price + (mscost_year*5)
+series ssaggregateY5 = price + (sscost_year*5)
+
+series AAmscommute_day = 52/mpg
+series AAmscommute_week = (AAmscommute_day*5)+(40/mpg)
+series AAmscommute_month = AAmscommute_week*4
+series AAmscommute_year = AAmscommute_week*52
+series AAmscost_day = AAmscommute_day*3.841
+series AAmscost_week = AAmscommute_week*3.841
+series AAmscost_month = AAmscommute_month*3.841
+series AAmscost_year = AAmscommute_year*3.841
+
+series AAsscommute_day = 128/mpg
+series AAsscommute_week = (AAsscommute_day*5)+(40/mpg)
+series AAsscommute_month = AAsscommute_week*4
+series AAsscommute_year = AAsscommute_week*52
+series AAsscost_day = AAsscommute_day*3.841
+series AAsscost_week = AAsscommute_week*3.841
+series AAsscost_month = AAsscommute_month*3.841
+series AAsscost_year = AAsscommute_year*3.841
+
+series AAmsaggregateY1 = price + AAmscost_year
+series AAssaggregateY1 = price + AAsscost_year
+series AAmsaggregateY2 = price + (AAmscost_year*2)
+series AAssaggregateY2 = price + (AAsscost_year*2)
+series AAmsaggregateY3 = price + (AAmscost_year*3)
+series AAssaggregateY3 = price + (AAsscost_year*3)
+series AAmsaggregateY4 = price + (AAmscost_year*4)
+series AAssaggregateY4 = price + (AAsscost_year*4)
+series AAmsaggregateY5 = price + (AAmscost_year*5)
+series AAssaggregateY5 = price + (AAsscost_year*5)
+
+
+gnuplot AAsscost_year mpg --output=display
+ols AAsscost_year const mpg
+ols AAsscost_year const mpg sscommute_year

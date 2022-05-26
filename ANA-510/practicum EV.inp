@@ -1,0 +1,56 @@
+series mscommute_day = 52/range_mi*batterysize
+series mscommute_week = (mscommute_day*5)+(40/range_mi*batterysize)
+series mscommute_month = mscommute_week*4
+series mscommute_year = mscommute_week*52
+
+series mscost_day = mscommute_day*0.17
+series mscost_week = mscommute_week*0.17
+series mscost_month = mscommute_month*0.17
+series mscost_year = mscommute_year*0.17
+
+series sscommute_day = 128/range_mi*batterysize
+series sscommute_week = (sscommute_day*5)+(40/range_mi*batterysize)
+series sscommute_month = sscommute_week*4
+series sscommute_year = sscommute_week*52
+
+series sscost_day = sscommute_day*0.17
+series sscost_week = sscommute_week*0.17
+series sscost_month = sscommute_month*0.17
+series sscost_year = sscommute_year*0.17
+
+series msaggregateY1 = price_dollar + mscost_year
+series ssaggregateY1 = price_dollar + sscost_year
+series msaggregateY2 = price_dollar + (mscost_year*2)
+series ssaggregateY2 = price_dollar + (sscost_year*2)
+series msaggregateY3 = price_dollar + (mscost_year*3)
+series ssaggregateY3 = price_dollar + (sscost_year*3)
+series msaggregateY4 = price_dollar + (mscost_year*4)
+series ssaggregateY4 = price_dollar + (sscost_year*4)
+series msaggregateY5 = price_dollar + (mscost_year*5)
+series ssaggregateY5 = price_dollar + (sscost_year*5)
+
+series AAmscost_day = mscommute_day*0.23
+series AAmscost_week = mscommute_week*0.23
+series AAmscost_month = mscommute_month*0.23
+series AAmscost_year = mscommute_year*0.23
+
+series AAsscost_day = sscommute_day*0.23
+series AAsscost_week = sscommute_week*0.23
+series AAsscost_month = sscommute_month*0.23
+series AAsscost_year = sscommute_year*0.23
+
+series AAmsaggregateY1 = price_dollar + AAmscost_year
+series AAssaggregateY1 = price_dollar + AAsscost_year
+series AAmsaggregateY2 = price_dollar + (AAmscost_year*2)
+series AAssaggregateY2 = price_dollar + (AAsscost_year*2)
+series AAmsaggregateY3 = price_dollar + (AAmscost_year*3)
+series AAssaggregateY3 = price_dollar + (AAsscost_year*3)
+series AAmsaggregateY4 = price_dollar + (AAmscost_year*4)
+series AAssaggregateY4 = price_dollar + (AAsscost_year*4)
+series AAmsaggregateY5 = price_dollar + (AAmscost_year*5)
+series AAssaggregateY5 = price_dollar + (AAsscost_year*5)
+
+gnuplot sscost_year batterysize --output=display
+ols sscost_year const batterysize
+gnuplot sscost_year mpge --output=display
+ols sscost_year const mpge sscommute_year

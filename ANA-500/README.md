@@ -9,3 +9,5 @@ This was a multipart project that walked us through how to formulate a report. T
 6. Multiple Linear Regression
 7. Functional Form
 8. Final Analysis (Final Research Paper)
+
+Please note that all coding and visualizations were created with gretl.
